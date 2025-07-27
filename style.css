@@ -1,0 +1,237 @@
+body {
+  margin: 0;
+  background: #000 url('https://i.pinimg.com/736x/b1/51/fb/b151fb3773bbca513104c696f261672e.jpg') center/cover no-repeat;
+  color: #0f0;
+  font-family: monospace;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Overlay garis bergerak */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    rgba(0, 255, 0, 0.05) 0px,
+    rgba(0, 255, 0, 0.05) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+  animation: moveStrip 3s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes moveStrip {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 100px; }
+}
+
+/* Header */
+header {
+  background: rgba(0,0,0,0.8);
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #0f0;
+  z-index: 5;
+  position: relative;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #0f0;
+  text-shadow: 0 0 15px #0f0, 0 0 25px #0f0;
+}
+
+.hud-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.hud-btn {
+  background: #111;
+  color: #0f0;
+  border: 2px solid #0f0;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-shadow: 0 0 5px #0f0;
+  transition: background 0.3s, transform 0.2s;
+}
+.hud-btn:hover {
+  background: #0f0;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* Kontainer Panel */
+#hud-panels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px;
+  width: 100%;
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+  position: relative;
+  z-index: 3;
+}
+
+/* Panel Hacker */
+.hud-panel {
+  position: relative;
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid #0f0;
+  padding: 10px;
+  color: #0f0;
+  width: 280px;
+  height: 200px;
+  overflow: auto;
+  box-shadow: 0 0 15px #0f0, 0 0 25px #0f0 inset;
+  font-size: 14px;
+  text-shadow: 0 0 5px #0f0;
+  border-radius: 6px;
+}
+
+/* Hacker Grid */
+.hacker-box {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #0f0;
+  color: #0f0;
+  font-size: 14px;
+  padding: 8px;
+  box-shadow: 0 0 15px #0f0, 0 0 25px #0f0 inset;
+  overflow: auto;
+  white-space: pre;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+/* Terminal Windows */
+.terminal {
+  position: absolute;
+  width: 320px;
+  height: 200px;
+  background: #000;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 10px rgba(0, 255, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.terminal-header {
+  background: #111;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.terminal-body {
+  flex: 1;
+  color: #0f0;
+  padding: 5px;
+  font-size: 12px;
+  overflow-y: auto;
+  white-space: pre;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .hud-panel {
+    width: 220px;
+    height: 160px;
+    font-size: 12px;
+  }
+  .hud-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  .terminal {
+    width: 90%;
+    height: 150px;
+    left: 5% !important;
+  }
+}
+input[type="file"] {
+  background: #111;
+  border: 1px solid #0f0;
+  padding: 5px;
+  cursor: pointer;
+}
+.cctv-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: black;
+  overflow: hidden;
+}
+
+.cctv-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.2) brightness(0.8);
+  animation: glitch 1s infinite;
+}
+
+.cctv-label {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  color: #0f0;
+  font-family: monospace;
+  font-size: 12px;
+  text-shadow: 0 0 5px #0f0;
+}
+
+.cctv-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    rgba(0, 0, 0, 0.2) 0px,
+    rgba(0, 0, 0, 0.2) 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(1px, -1px); }
+  40% { transform: translate(-1px, 1px); }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0); }
+}
+.cctv-video {
+  animation: glitch 1s infinite;
+}
+.cctv-scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(0,255,0,0.3), transparent);
+  animation: scanMove 2s linear infinite;
+}
+
+@keyframes scanMove {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
